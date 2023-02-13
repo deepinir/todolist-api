@@ -47,9 +47,7 @@ export class TaskService {
       taskArray.description = task.description
         ? task.description
         : taskArray.description;
-      taskArray.completed = task.completed
-        ? task.completed
-        : taskArray.completed;
+      taskArray.completed = task.completed;
     }
 
     return taskArray;
