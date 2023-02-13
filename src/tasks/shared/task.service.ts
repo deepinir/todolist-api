@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {Task} from './task';
 
 @Injectable()
-export class TaskService { 
+export class TaskService {
   tasks: Task[] | null = [
     { id: 1, description: 'Task 1', completed: false },
     { id: 2, description: 'Task 2', completed: false },
@@ -57,6 +57,8 @@ export class TaskService {
     this.tasks.splice(index, 1);
   }
   clearAll() {
-    this.tasks = [];
+    console.log('zartttttttttttttttttttt');
+    this.tasks = null;
+    return this.tasks;
   }
 }

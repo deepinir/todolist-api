@@ -20,6 +20,11 @@ export class TasksController {
     return this.tasksService.getAll();
   }
 
+  @Delete('/clear-all')
+  async clearAll(): Promise<Task[]> {
+    return this.tasksService.clearAll();
+  }
+
   @Get(':id')
   async getById(@Param('id') id: number): Promise<Task> {
     return this.tasksService.getById(id);
@@ -35,10 +40,6 @@ export class TasksController {
     task.id = id;
 
     return this.tasksService.update(task);
-  }
-  @Put('/clear-all')
-  async clearAll(): Promise<void> {
-    return this.tasksService.clearAll();
   }
 
   @Delete(':id')
