@@ -36,6 +36,10 @@ export class TasksController {
 
     return this.tasksService.update(task);
   }
+  @Put('/clear-all')
+  async clearAll(): Promise<void> {
+    return this.tasksService.clearAll();
+  }
 
   @Delete(':id')
   async delete(@Param('id') id: number) {

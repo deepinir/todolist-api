@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { Task } from './task';
+import {Injectable} from '@nestjs/common';
+import {Task} from './task';
 
 @Injectable()
 export class TaskService { 
-  tasks: Task[] = [
+  tasks: Task[] | null = [
     { id: 1, description: 'Task 1', completed: false },
     { id: 2, description: 'Task 2', completed: false },
     { id: 3, description: 'Task 3', completed: true },
@@ -21,9 +21,7 @@ export class TaskService {
   }
 
   getById(id: number) {
-    const task = this.tasks.find((value) => value.id == id); 
-
-    return task;
+    return this.tasks.find((value) => value.id == id);
   }
 
   create(task: Task) {
@@ -57,5 +55,8 @@ export class TaskService {
     const index = this.tasks.findIndex((value) => value.id == id);
 
     this.tasks.splice(index, 1);
+  }
+  clearAll() {
+    this.tasks = [];
   }
 }
