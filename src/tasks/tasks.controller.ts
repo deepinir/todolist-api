@@ -1,14 +1,15 @@
-import { 
-  Body, 
-  Controller, 
-  Delete, 
-  Get, 
-  Param, 
-  Post, 
-  Put 
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put, Query
 } from '@nestjs/common';
 import { Task } from './shared/task';
 import { TaskService } from './shared/task.service';
+import {TaskStateEnum} from "./shared/task-state.enum";
 
 
 @Controller('tasks')
@@ -16,8 +17,8 @@ export class TasksController {
   constructor(private tasksService: TaskService) {}
 
   @Get()
-  async getAll(): Promise<Task[]> {
-    return this.tasksService.getAll();
+  async getAll(@Query('q') q: TaskStateEnum): Promise<Task[]> {
+    return this.tasksService.getAll(q);
   }
 
   @Delete('/clear-all')

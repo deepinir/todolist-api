@@ -1,5 +1,7 @@
-import {Injectable} from '@nestjs/common';
-import {Task} from './task';
+import { Injectable } from '@nestjs/common';
+import { Task } from './task';
+import * as stream from 'stream';
+import { TaskStateEnum } from './task-state.enum';
 
 @Injectable()
 export class TaskService {
@@ -13,11 +15,19 @@ export class TaskService {
     { id: 7, description: 'Task 7', completed: false },
     { id: 8, description: 'Task 8', completed: false },
     { id: 9, description: 'Task 9', completed: false },
-    { id: 10, description: 'Task 10', completed: true }
+    { id: 10, description: 'Task 10', completed: true },
   ];
 
-  getAll() {
-    return this.tasks;
+  getAll(q: TaskStateEnum) {
+    if (q && q != TaskStateEnum.ALL) {
+      if (q === TaskStateEnum.COMPLETED) {
+        return this.tasks.filter((item: Task) => item.completed === true);
+      } else if (q === TaskStateEnum.PENDING) {
+        return this.tasks.filter((item: Task) => item.completed === false);
+      }
+    } else {
+      return this.tasks;
+    }
   }
 
   getById(id: number) {
@@ -57,7 +67,6 @@ export class TaskService {
     this.tasks.splice(index, 1);
   }
   clearAll() {
-    console.log('zartttttttttttttttttttt');
     this.tasks = null;
     return this.tasks;
   }
