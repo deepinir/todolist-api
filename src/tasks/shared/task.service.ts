@@ -44,8 +44,12 @@ export class TaskService {
     const taskArray = this.getById(task.id);
 
     if (taskArray) {
-      taskArray.description = task.description;
-      taskArray.completed =  task.completed;
+      taskArray.description = task.description
+        ? task.description
+        : taskArray.description;
+      taskArray.completed = task.completed
+        ? task.completed
+        : taskArray.completed;
     }
 
     return taskArray;
