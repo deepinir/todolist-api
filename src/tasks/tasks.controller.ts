@@ -17,7 +17,7 @@ export class TasksController {
   constructor(private tasksService: TaskService) {}
 
   @Get()
-  async getAll(@Query('q') q: TaskStateEnum): Promise<Task[]> {
+  async getAll(@Query('q') q?: TaskStateEnum): Promise<Task[]> {
     return this.tasksService.getAll(q);
   }
 
