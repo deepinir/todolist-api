@@ -18,8 +18,8 @@ export class TaskService {
     { id: 10, description: 'Task 10', completed: true },
   ];
 
-  getAll(q?: TaskStateEnum) {
-    if (q.length > 0 && q != TaskStateEnum.ALL) {
+  getAll(q?: TaskStateEnum | string) {
+    if (q && q.length > 0 && q !== 'null' && q != TaskStateEnum.ALL) {
       if (q === TaskStateEnum.COMPLETED) {
         return this.tasks.filter((item: Task) => item.completed === true);
       } else if (q === TaskStateEnum.PENDING) {
